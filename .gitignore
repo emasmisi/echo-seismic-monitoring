@@ -1,4 +1,10 @@
 # Ignore the following files and directories
 /docker\ and\ documentation
 source/seismic-signal-simulator-oci.tar
+*.tar.DS_Store
+__pycache__/
+*.pyc
+node_modules/
+.env.local
+dlq.log
 *.tar
