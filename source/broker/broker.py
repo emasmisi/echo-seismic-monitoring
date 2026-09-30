@@ -1,5 +1,5 @@
 # main.py
-# E.C.H.O. Seismic Broker — Ingestion + Fan-out layer
+# E.C.H.O. Seismic Broker: Ingestion + Fan-out layer
 # Covers: sensor discovery, WebSocket ingestion, exponential backoff, DLQ, fan-out server
 
 # ==========================================
@@ -56,7 +56,7 @@ class SensorInfo:
     sensor_id:     str
     websocket_url: str    # relative path,  e.g. /api/device/sensor-08/ws
     full_ws_url:   str    # full WS address, e.g. ws://localhost:8080/api/device/sensor-08/ws
-    location:      dict   # {"latitude": float, "longitude": float} — forwarded to replicas
+    location:      dict   # {"latitude": float, "longitude": float}: forwarded to replicas
     raw:           dict   # original JSON payload from /api/devices/, kept for debugging
     sampling_rate: float
 # ==========================================
@@ -185,7 +185,7 @@ async def read_messages(
             await write_to_dlq(sensor.sensor_id, raw_message, reason)
             continue
 
-        # Enrich — add broker-side metadata and geographical coordinates
+        # Enrich: add broker-side metadata and geographical coordinates
         data["sensor_id"]   = sensor.sensor_id
         data["value"]       = float(data["value"])   # normalise to native float
         data["ingested_at"] = datetime.now(timezone.utc).isoformat()
@@ -214,7 +214,7 @@ async def sensor_ingestion_loop(
         if attempt > 0:
             wait_time = min(BACKOFF_BASE ** attempt, BACKOFF_MAX)
             logger.warning(
-                f"[{sensor.sensor_id}] Attempt #{attempt} — "
+                f"[{sensor.sensor_id}] Attempt #{attempt}: "
                 f"waiting {wait_time}s before reconnecting..."
             )
             await asyncio.sleep(wait_time)
@@ -237,7 +237,7 @@ async def sensor_ingestion_loop(
                 attempt = 0
                 logger.info(
                     f"[{sensor.sensor_id}] Dropped after {elapsed:.0f}s stable "
-                    f"— resetting backoff."
+                    f",  resetting backoff."
                 )
             else:
                 attempt += 1
@@ -266,10 +266,10 @@ async def replica_handler(websocket) -> None:
             try:
                 pong_waiter = await websocket.ping()
                 await asyncio.wait_for(pong_waiter, timeout=10.0)
-                logger.debug(f"[health] Replica {replica_addr} — pong received ✓")
+                logger.debug(f"[health] Replica {replica_addr}: pong received ✓")
             except (asyncio.TimeoutError, websockets.ConnectionClosed):
                 logger.warning(
-                    f"[health] Replica {replica_addr} failed health-check — removing from pool."
+                    f"[health] Replica {replica_addr} failed health-check: removing from pool."
                 )
                 break
 
@@ -306,7 +306,7 @@ async def fanout_dispatcher(output_queue: asyncio.Queue) -> None:
             await asyncio.gather(*send_tasks, return_exceptions=True)
         else:
             logger.debug(
-                f"[fanout] No replicas connected — message from "
+                f"[fanout] No replicas connected: message from "
                 f"{data.get('sensor_id')} dropped."
             )
 

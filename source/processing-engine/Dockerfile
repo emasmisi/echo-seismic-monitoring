@@ -1,6 +1,6 @@
 # ==========================================
-# E.C.H.O. Processing Replica — Dockerfile
-# Emanuele Smisi — Signal Processing
+# E.C.H.O. Processing Replica: Dockerfile
+# Emanuele Smisi: Signal Processing
 # ==========================================
 
 # --- Stage 1: Builder ---

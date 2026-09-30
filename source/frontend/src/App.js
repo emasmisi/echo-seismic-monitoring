@@ -154,7 +154,7 @@ const Dashboard = ({ username, onLogout }) => {
           setLastUpdate(new Date());
           // US-24: nuclear modal
           if (evt.eventType === 'Nuclear-like event') {
-            const alertMsg = `Nuclear-like event at sensor ${evt.sensorId} [${evt.location?.latitude}, ${evt.location?.longitude}] — Severity: ${evt.severityScore}`;
+            const alertMsg = `Nuclear-like event at sensor ${evt.sensorId} [${evt.location?.latitude}, ${evt.location?.longitude}]: Severity: ${evt.severityScore}`;
             setNuclearAlerts(prev => [alertMsg, ...prev]);
             new Audio('/alert-sound.mp3').play().catch(() => {});
           }
@@ -383,7 +383,7 @@ const Dashboard = ({ username, onLogout }) => {
               <span className="stat-value">
                 {historyEvents.length > 0
                   ? (historyEvents.reduce((s, e) => s + e.dominant_hz, 0) / historyEvents.length).toFixed(2)
-                  : '—'}
+                  : ', '}
               </span>
               <span className="stat-label">Avg. Freq (Hz)</span>
             </div>
@@ -391,7 +391,7 @@ const Dashboard = ({ username, onLogout }) => {
               <span className="stat-value">
                 {historyEvents.length > 0
                   ? Math.max(...historyEvents.map(e => e.severity_score)).toFixed(1)
-                  : '—'}
+                  : ', '}
               </span>
               <span className="stat-label">Peak Severity</span>
             </div>

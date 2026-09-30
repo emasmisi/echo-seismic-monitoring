@@ -145,7 +145,7 @@ class SeismicReplicaState:
         if event_type == EVENT_TYPE_NONE:
             return None
 
-        # ← NUOVO: cooldown per-sensore — evita burst di detections sullo stesso evento fisico
+        # ← NUOVO: cooldown per-sensore: evita burst di detections sullo stesso evento fisico
         now  = time.time()
         last = self._last_emitted.get(sensor_id, 0.0)
         if now - last < self.cooldown_seconds:
@@ -237,7 +237,7 @@ _circuit_breaker = CircuitBreaker(failure_threshold=5, recovery_timeout=30.0)
 
 async def persist_event(event: dict) -> None:
     if _circuit_breaker.is_open():
-        print(f"[circuit-breaker] OPEN — dropping event {event.get('eventId')}")
+        print(f"[circuit-breaker] OPEN: dropping event {event.get('eventId')}")
         return
 
     async with httpx.AsyncClient() as client:

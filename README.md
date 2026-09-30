@@ -1,8 +1,8 @@
-# E.C.H.O. — Earthquake & Conflict Hazard Observer
+# E.C.H.O.: Earthquake & Conflict Hazard Observer
 
 **Distributed, fault-tolerant platform for real-time seismic monitoring and automatic event classification.**
 
-Team project for *Laboratory of Advanced Programming* — MSc in Engineering in Computer Science and Artificial Intelligence, Sapienza University of Rome (A.Y. 2025/26).
+Team project for *Laboratory of Advanced Programming*, MSc in Engineering in Computer Science and Artificial Intelligence, Sapienza University of Rome (A.Y. 2025/26).
 
 > Portfolio copy of the official team repository [enoughpaladin00/2003424_ECHO](https://github.com/enoughpaladin00/2003424_ECHO), with full commit history. See [Team](#team) for my role.
 
@@ -14,8 +14,8 @@ A network of simulated seismic sensors streams ground-velocity measurements (20 
 
 | Dominant frequency | Classification |
 |---|---|
-| 0.5 – 3.0 Hz | 🌍 Earthquake |
-| 3.0 – 8.0 Hz | 💥 Conventional explosion |
+| 0.5-3.0 Hz | 🌍 Earthquake |
+| 3.0-8.0 Hz | 💥 Conventional explosion |
 | ≥ 8.0 Hz | ☢️ Nuclear-like event |
 
 Each event gets a severity score, is stored exactly once in PostgreSQL and is pushed live to an analyst dashboard with an interactive map.

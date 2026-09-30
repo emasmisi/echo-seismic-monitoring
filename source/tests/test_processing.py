@@ -18,7 +18,7 @@ def make_signal(freq_hz: float, fs: int = FS, n: int = WINDOW) -> list:
     return list(np.sin(2 * np.pi * freq_hz * t) * 500)  # ampiezza alta per superare threshold
 
 # -------------------------------------------------------
-# US-11: classificazione Earthquake (0.5–3.0 Hz)
+# US-11: classificazione Earthquake (0.5-3.0 Hz)
 # -------------------------------------------------------
 def test_classify_earthquake():
     signal = make_signal(1.5)
@@ -27,7 +27,7 @@ def test_classify_earthquake():
     assert 0.5 <= freq < 3.0
 
 # -------------------------------------------------------
-# US-12: classificazione Conventional explosion (3.0–8.0 Hz)
+# US-12: classificazione Conventional explosion (3.0-8.0 Hz)
 # -------------------------------------------------------
 def test_classify_explosion():
     signal = make_signal(5.0)

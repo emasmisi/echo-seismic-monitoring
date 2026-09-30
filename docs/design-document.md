@@ -1,4 +1,4 @@
-# E.C.H.O. (Earthquake & Conflict Hazard Observer) — Student Documentation
+# E.C.H.O. (Earthquake & Conflict Hazard Observer): Student Documentation
 
 ## SYSTEM DESCRIPTION
 
@@ -20,8 +20,8 @@ By analysing dominant frequency components, E.C.H.O. automatically classifies th
 8. As a System Administrator, I want the broker to implement a dead-letter queue for malformed measurements so that invalid data does not crash the processing replicas.
 9. As the System, I need to maintain an in-memory sliding window of recent time-domain measurements for each sensor to prepare the data for frequency analysis.
 10. As the System, I need to apply a Discrete Fourier Transform (DFT) or an equivalent FFT method on the sliding window to extract dominant frequency components.
-11. As an Intelligence Analyst, I want the system to automatically classify an event as an "Earthquake" (0.5–3.0 Hz) so that natural occurrences are categorised correctly.
-12. As an Intelligence Analyst, I want the system to automatically classify an event as a "Conventional Explosion" (3.0–8.0 Hz) so I can identify potential military conflicts.
+11. As an Intelligence Analyst, I want the system to automatically classify an event as an "Earthquake" (0.5-3.0 Hz) so that natural occurrences are categorised correctly.
+12. As an Intelligence Analyst, I want the system to automatically classify an event as a "Conventional Explosion" (3.0-8.0 Hz) so I can identify potential military conflicts.
 13. As an Intelligence Analyst, I want the system to classify an event as a "Nuclear-like Event" (≥ 8.0 Hz) so that I can immediately identify catastrophic strategic threats.
 14. As an Intelligence Analyst, I want the system to calculate and attach a severity score to each event based on the amplitude of the signal so that I can prioritise responses to the strongest events.
 15. As a System Administrator, I want the processing replicas to listen to the simulator's control stream via SSE and self-terminate upon receiving a shutdown command so that node failure is accurately simulated.
@@ -139,7 +139,7 @@ The API-Gateway container acts as the single entry point for the system, routing
 `80:80`, `443:443`
 
 ### PERSISTENCE EVALUATION
-Stateless — no data persistence required.
+Stateless: no data persistence required.
 
 ### EXTERNAL SERVICES CONNECTIONS
 No direct external connections; manages traffic between the public network and the internal `echo-network`.
@@ -280,9 +280,9 @@ None.
 
 - **DB STRUCTURE:**
 
-**`seismic_events`** — `id` · `event_id (UNIQUE)` · `sensor_id` · `event_type` · `dominant_hz` · `latitude` · `longitude` · `severity_score` · `timestamp` · `replica_id`
+**`seismic_events`**: `id` · `event_id (UNIQUE)` · `sensor_id` · `event_type` · `dominant_hz` · `latitude` · `longitude` · `severity_score` · `timestamp` · `replica_id`
 
-**`seismic_events_archive`** — Archive table for events older than 30 days.
+**`seismic_events_archive`**: Archive table for events older than 30 days.
 
 ---
 
